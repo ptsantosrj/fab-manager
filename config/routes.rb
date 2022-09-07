@@ -251,6 +251,9 @@ Rails.application.routes.draw do
     post 'payzen/update_token' => 'payzen#update_token'
     post 'payzen/check_cart' => 'payzen#check_cart'
 
+    ## Pagseguro gateway
+    post 'pagseguro/sdk_test' => 'pagseguro#test'
+
     # local payments handling
     post 'local_payment/confirm_payment' => 'local_payment#confirm_payment'
 
