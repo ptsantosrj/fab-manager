@@ -133,6 +133,7 @@ class Setting < ApplicationRecord
                              payzen_public_key
                              payzen_hmac
                              payzen_currency
+                             pagseguro_token
                              public_agenda_module
                              renew_pack_threshold
                              pack_only_for_subscription

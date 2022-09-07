@@ -898,6 +898,9 @@ fr:
           stripe_keys_info_html: "<p>Pour pouvoir encaisser des paiements en ligne, vous devez configurer les clefs d'API <a href='https://stripe.com' target='_blank'>Stripe</a>.</p><p>Retrouvez les dans <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>votre tableau de bord</a>.</p><p>Mettre à jour ces clefs entraînera une synchronisation de tous les utilisateurs vers Stripe, ceci peut prendre du temps. Vous recevrez une notification lorsque cela sera terminé.</p>"
           public_key: "Clef publique"
           secret_key: "Clef secrète"
+        pagseguro_keys_form:
+          pagseguro_keys_info_html: "<p>To configure the token at PagSeguro, access the manual and follow the step by step <a href='https://dev.pagseguro.uol.com.br/v1.0/page/quickstart-checkout-pagseguro-redirection ' target='_blank'>clicking here</a>.<br>Remembering that this integration with PagSeguro is through the redirection link only.</p>"
+          token: "PagSeguro token"
         payment:
           payment_settings: "Paramètres de paiement"
           online_payment: "Paiement en ligne"
@@ -938,6 +941,7 @@ fr:
             select_gateway: "Veuillez choisir une des passerelles disponibles"
             stripe: "Stripe"
             payzen: "PayZen"
+            pagseguro: "PagSeguro"
             confirm_button: "Valider la passerelle"
         payment_schedules_list:
           filter_schedules: "Filtrer les échéanciers"

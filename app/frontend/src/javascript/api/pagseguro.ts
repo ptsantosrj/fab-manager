@@ -6,12 +6,9 @@ import {
   SdkTestResponse,
   PaymentLinkResponse
 } from '../models/pagseguro';
-import { Invoice } from '../models/invoice';
-import { PaymentSchedule } from '../models/payment-schedule';
-
 export default class PagseguroAPI {
-  static async chargeSDKTest (baseURL: string, username: string, password: string): Promise<SdkTestResponse> {
-    const res: AxiosResponse<SdkTestResponse> = await apiClient.post('/api/pagseguro/sdk_test', { base_url: baseURL, username, password });
+  static async testToken (token: string): Promise<SdkTestResponse> {
+    const res: AxiosResponse<SdkTestResponse> = await apiClient.post('/api/pagseguro/test_token', { token });
     return res?.data;
   }
 

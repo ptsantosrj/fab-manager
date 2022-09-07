@@ -895,9 +895,12 @@ zu:
           payzen_endpoint: "crwdns25446:0crwdne25446:0"
           payzen_hmac: "crwdns25448:0crwdne25448:0"
         stripe_keys_form:
-          stripe_keys_info_html: "crwdns25450:0crwdne25450:0"
-          public_key: "crwdns25452:0crwdne25452:0"
-          secret_key: "crwdns25454:0crwdne25454:0"
+          stripe_keys_info_html: "crwdns23182:0crwdne23182:0"
+          public_key: "crwdns23184:0crwdne23184:0"
+          secret_key: "crwdns23186:0crwdne23186:0"
+        pagseguro_keys_form:
+          pagseguro_keys_info_html: "<p>To configure the token at PagSeguro, access the manual and follow the step by step <a href='https://dev.pagseguro.uol.com.br/v1.0/page/quickstart-checkout-pagseguro-redirection ' target='_blank'>clicking here</a>.<br>Remembering that this integration with PagSeguro is through the redirection link only.</p>"
+          token: "PagSeguro token"
         payment:
           payment_settings: "crwdns25456:0crwdne25456:0"
           online_payment: "crwdns25458:0crwdne25458:0"
