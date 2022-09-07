@@ -4,6 +4,7 @@ import { react2angular } from 'react2angular';
 import { Loader } from '../base/loader';
 import { StripeModal } from './stripe/stripe-modal';
 import { PayzenModal } from './payzen/payzen-modal';
+import { PagseguroModal } from './pagseguro/pagseguro-modal';
 import { IApplication } from '../../models/application';
 import { ShoppingCart } from '../../models/payment';
 import { User } from '../../models/user';
@@ -74,6 +75,20 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
   };
 
   /**
+   * Render the PagSeguro payment modal
+   */
+  const renderPagSeguroModal =(): ReactElement => {
+    return <PagseguroModal isOpen={isOpen}
+      toggleModal={toggleModal}
+      afterSuccess={afterSuccess}
+      onError={onError}
+      cart={cart}
+      currentUser={currentUser}
+      schedule={schedule}
+      customer={customer} />;
+  }
+
+  /**
    * Determine which gateway is enabled and return the appropriate payment modal
    */
   if (gateway === null || !isOpen) return <div/>;
@@ -83,6 +98,8 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
       return renderStripeModal();
     case 'payzen':
       return renderPayZenModal();
+    case 'pagseguro':
+      return renderPagSeguroModal();
     case null:
     case undefined:
       onError(t('app.shared.card_payment_modal.online_payment_disabled'));

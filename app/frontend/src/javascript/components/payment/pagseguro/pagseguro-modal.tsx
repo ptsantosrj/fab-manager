@@ -1,0 +1,79 @@
+import React, { FunctionComponent, ReactNode } from 'react';
+import { GatewayFormProps, AbstractPaymentModal } from '../abstract-payment-modal';
+import { ShoppingCart } from '../../../models/payment';
+import { PaymentSchedule } from '../../../models/payment-schedule';
+import { User } from '../../../models/user';
+import { Invoice } from '../../../models/invoice';
+
+import payzenLogo from '../../../../../images/payzen-secure.png';
+import mastercardLogo from '../../../../../images/mastercard.png';
+import visaLogo from '../../../../../images/visa.png';
+import { PagseguroForm } from './pagseguro-form';
+
+interface PagseguroModalProps {
+  isOpen: boolean,
+  toggleModal: () => void,
+  afterSuccess: (result: Invoice|PaymentSchedule) => void,
+  onError: (message: string) => void,
+  cart: ShoppingCart,
+  currentUser: User,
+  schedule?: PaymentSchedule,
+  customer: User
+}
+
+/**
+ * This component enables the user to input his card data or process payments, using the PayZen gateway.
+ * Supports Strong-Customer Authentication (SCA).
+ *
+ * This component should not be called directly. Prefer using <CardPaymentModal> which can handle the configuration
+ *  of a different payment gateway.
+ */
+export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
+  /**
+   * Return the logos, shown in the modal footer.
+   */
+  const logoFooter = (): ReactNode => {
+    return (
+      <div className="payzen-modal-icons">
+        <img src={payzenLogo} alt="powered by PayZen" />
+        <img src={mastercardLogo} alt="mastercard" />
+        <img src={visaLogo} alt="visa" />
+      </div>
+    );
+  };
+
+  /**
+   * Integrates the PayzenForm into the parent PaymentModal
+   */
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children }) => {
+    return (
+      <PagseguroForm onSubmit={onSubmit}
+        onSuccess={onSuccess}
+        onError={onError}
+        customer={customer}
+        operator={operator}
+        formId={formId}
+        cart={cart}
+        className={className}
+        paymentSchedule={paymentSchedule}>
+        {children}
+      </PagseguroForm>
+    );
+  };
+
+  return (
+    <AbstractPaymentModal isOpen={isOpen}
+      toggleModal={toggleModal}
+      logoFooter={logoFooter()}
+      formId="pagseguro-form"
+      formClassName="payzen-form"
+      className="payzen-modal"
+      currentUser={currentUser}
+      cart={cart}
+      customer={customer}
+      afterSuccess={afterSuccess}
+      onError={onError}
+      schedule={schedule}
+      GatewayForm={renderForm} />
+  );
+};
