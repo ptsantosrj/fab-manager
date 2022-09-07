@@ -10,6 +10,7 @@ import { react2angular } from 'react2angular';
 import { useTranslation } from 'react-i18next';
 import { StripeKeysForm } from './stripe/stripe-keys-form';
 import { PayzenKeysForm } from './payzen/payzen-keys-form';
+import { PagseguroKeysForm } from './pagseguro/pagseguro-keys-form';
 import { FabModal, ModalSize } from '../base/fab-modal';
 import { Loader } from '../base/loader';
 import { User } from '../../models/user';
@@ -91,6 +92,18 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
   };
 
   /**
+   * Callback triggered when the embedded form has validated all the PagSeguro keys
+   */
+  const handleValidPagSeguroKeys = (token: string): void => {
+    setGatewayConfig((prev) => {
+      const newMap = new Map(prev);
+      newMap.set('pagseguro_token', token);
+      return newMap;
+    });
+    setPreventConfirmGateway(false);
+  };
+
+  /**
    * Callback triggered when the embedded form has not validated all keys
    */
   const handleInvalidKeys = (): void => {
@@ -134,9 +147,11 @@ export const SelectGatewayModal: React.FC<SelectGatewayModalModalProps> = ({ isO
         <option />
         <option value={Gateway.Stripe}>{t('app.admin.invoices.payment.select_gateway_modal.stripe')}</option>
         <option value={Gateway.PayZen}>{t('app.admin.invoices.payment.select_gateway_modal.payzen')}</option>
+        <option value={Gateway.PagSeguro}>{t('app.admin.invoices.payment.select_gateway_modal.pagseguro')}</option>
       </select>
       {selectedGateway === Gateway.Stripe && <StripeKeysForm onValidKeys={handleValidStripeKeys} onInvalidKeys={handleInvalidKeys} />}
       {selectedGateway === Gateway.PayZen && <PayzenKeysForm onValidKeys={handleValidPayZenKeys} onInvalidKeys={handleInvalidKeys} />}
+      {selectedGateway === Gateway.PagSeguro && <PagseguroKeysForm onValidKeys={handleValidPagSeguroKeys} onInvalidKeys={handleInvalidKeys} />}
     </FabModal>
   );
 };
