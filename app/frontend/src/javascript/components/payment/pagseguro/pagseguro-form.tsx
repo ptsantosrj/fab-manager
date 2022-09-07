@@ -3,7 +3,7 @@ import KRGlue from '@lyracom/embedded-form-glue';
 import { GatewayFormProps } from '../abstract-payment-modal';
 import SettingAPI from '../../../api/setting';
 import PayzenAPI from '../../../api/payzen';
-import PagseguroAPI from '../../../api/pagseguro';
+// import PagseguroAPI from '../../../api/pagseguro';
 import {
   CreateTokenResponse,
   KryptonClient,
@@ -155,10 +155,10 @@ export const PagseguroForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, 
   };
 
   return (
-    <form onSubmit={handleSubmit} id={formId} className={`payzen-form ${className || ''}`}>
+    <form onSubmit={handleSubmit} id={formId} className={`pagseguro-form ${className || ''}`}>
       <Loader />
       <div className="payzen-container">
-        <div id="payzenPaymentForm" />
+        <div id="pagseguroPaymentForm" />
       </div>
       {children}
     </form>

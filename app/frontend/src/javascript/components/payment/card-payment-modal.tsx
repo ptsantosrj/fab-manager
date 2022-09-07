@@ -77,7 +77,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
   /**
    * Render the PagSeguro payment modal
    */
-  const renderPagSeguroModal =(): ReactElement => {
+  const renderPagSeguroModal = (): ReactElement => {
     return <PagseguroModal isOpen={isOpen}
       toggleModal={toggleModal}
       afterSuccess={afterSuccess}
@@ -86,7 +86,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
       currentUser={currentUser}
       schedule={schedule}
       customer={customer} />;
-  }
+  };
 
   /**
    * Determine which gateway is enabled and return the appropriate payment modal
