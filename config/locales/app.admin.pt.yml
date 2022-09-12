@@ -901,6 +901,7 @@ pt:
         pagseguro_keys_form:
           pagseguro_keys_info_html: "<p>Para configurar o token na PagSeguro acesse o manual e siga o passo a passo <a href='https://dev.pagseguro.uol.com.br/v1.0/page/quickstart-checkout-pagseguro-redirecionamento' target='_blank'>clicando aqui</a>.<br>Lembrando que esta integração com a PagSeguro é através do link de redirecionamento apenas.</p>"
           token: "Token da PagSeguro"
+          email: "Email cadastrado na PagSeguro"
         payment:
           payment_settings: "Configurações de pagamento"
           online_payment: "Pagamento Online"
