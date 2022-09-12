@@ -7,7 +7,7 @@ import SettingAPI from '../../../api/setting';
 import PagseguroAPI from '../../../api/pagseguro';
 
 interface PagseguroKeysFormProps {
-  onValidKeys: (token: string) => void,
+  onValidKeys: (token: string, email: string) => void,
   onInvalidKeys: () => void,
 }
 
@@ -26,7 +26,12 @@ const PagseguroKeysForm: React.FC<PagseguroKeysFormProps> = ({ onValidKeys, onIn
   const [tokenAddOnClassName, setTokenAddOnClassName] = useState<string>('');
   // Icon for token input
   const [tokenAddOn, setTokenAddOn] = useState<ReactNode>(null);
-
+  // PagSeguro email
+  const [email, setEmail] = useState<string>('');
+  // Style class for add-on email
+  const [emailAddOnClassName, setEmailAddOnClassName] = useState<string>('');
+  // Icon for email input
+  const [emailAddOn, setEmailAddOn] = useState<ReactNode>(null);
   /**
    * When the component loads for the first time:
    * - mark it as mounted
@@ -35,8 +40,9 @@ const PagseguroKeysForm: React.FC<PagseguroKeysFormProps> = ({ onValidKeys, onIn
   useEffect(() => {
     mounted.current = true;
 
-    SettingAPI.query(['pagseguro_token']).then(pagseguroKeys => {
+    SettingAPI.query(['pagseguro_token', 'pagseguro_email']).then(pagseguroKeys => {
       setToken(pagseguroKeys.get('pagseguro_token'));
+      setEmail(pagseguroKeys.get('pagseguro_email'));
     }).catch(error => console.error(error));
 
     // when the component unmounts, mark it as unmounted
@@ -51,12 +57,28 @@ const PagseguroKeysForm: React.FC<PagseguroKeysFormProps> = ({ onValidKeys, onIn
    */
   useEffect(() => {
     const validClassName = 'key-valid';
-    if (tokenAddOnClassName === validClassName) {
-      onValidKeys(token);
+    if (tokenAddOnClassName === validClassName && emailAddOnClassName === validClassName) {
+      onValidKeys(token, email);
     } else {
       onInvalidKeys();
     }
-  }, [tokenAddOnClassName]);
+  }, [tokenAddOnClassName, emailAddOnClassName]);
+
+  /**
+   * Validate email input
+   */
+  const validateEmail = (email: string) => {
+    setEmailAddOnClassName('');
+
+    if (/^[a-zA-Z0-9]+[\w.-]*@[\w.-]*\.[\w-]{2,}$/.test(email)) {
+      setEmail(email);
+      setEmailAddOn(<i className="fa fa-check" />);
+      setEmailAddOnClassName('key-valid');
+    } else {
+      setEmailAddOn(<i className="fa fa-times" />);
+      setEmailAddOnClassName('key-invalid');
+    }
+  };
 
   /**
    * Send a test call to PagSeguro API to validate token
@@ -91,6 +113,18 @@ const PagseguroKeysForm: React.FC<PagseguroKeysFormProps> = ({ onValidKeys, onIn
         <HtmlTranslate trKey="app.admin.invoices.pagseguro_keys_form.pagseguro_keys_info_html" />
       </div>
       <form name="pagseguroKeysForm">
+      <div className="pagseguro-secret-input">
+          <label htmlFor="pagseguro_email">{ t('app.admin.invoices.pagseguro_keys_form.email') } *</label>
+          <FabInput id="pagseguro_email"
+            icon={<i className="fa fa-envelope" />}
+            defaultValue={email}
+            onChange={validateEmail}
+            addOn={emailAddOn}
+            addOnClassName={emailAddOnClassName}
+            debounce={50}
+            type="email"
+            required/>
+        </div>
         <div className="pagseguro-secret-input">
           <label htmlFor="pagseguro_token">{ t('app.admin.invoices.pagseguro_keys_form.token') } *</label>
           <FabInput id="pagseguro_token"
