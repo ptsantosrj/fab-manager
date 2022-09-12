@@ -7,8 +7,8 @@ import {
   PaymentLinkResponse
 } from '../models/pagseguro';
 export default class PagseguroAPI {
-  static async testToken (token: string): Promise<SdkTestResponse> {
-    const res: AxiosResponse<SdkTestResponse> = await apiClient.post('/api/pagseguro/test_token', { token });
+  static async testToken (token: string, email: string): Promise<SdkTestResponse> {
+    const res: AxiosResponse<SdkTestResponse> = await apiClient.post('/api/pagseguro/test_token', { token, email });
     return res?.data;
   }
 

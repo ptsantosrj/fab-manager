@@ -91,6 +91,7 @@ gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs', '~> 7.1.23'
 
 gem 'stripe', '5.29.0'
+gem 'pagseguro-oficial', '~> 2.5.0'
 
 gem 'recurrence'
 
