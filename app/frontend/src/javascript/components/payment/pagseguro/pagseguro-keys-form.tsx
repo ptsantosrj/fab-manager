@@ -91,7 +91,7 @@ const PagseguroKeysForm: React.FC<PagseguroKeysFormProps> = ({ onValidKeys, onIn
       setTokenAddOnClassName('key-invalid');
       return;
     }
-    PagseguroAPI.testToken(key).then(() => {
+    PagseguroAPI.testToken(key, email).then(() => {
       if (!mounted.current) return;
 
       setToken(key);
