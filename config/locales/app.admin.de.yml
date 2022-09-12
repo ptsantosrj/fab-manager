@@ -1032,6 +1032,7 @@ de:
         pagseguro_keys_form:
           pagseguro_keys_info_html: "<p>To configure the token at PagSeguro, access the manual and follow the step by step <a href='https://dev.pagseguro.uol.com.br/v1.0/page/quickstart-checkout-pagseguro-redirection ' target='_blank'>clicking here</a>.<br>Remembering that this integration with PagSeguro is through the redirection link only.</p>"
           token: "PagSeguro token"
+          email: "PagSeguro email"
         payment:
           payment_settings: "Bezahlungseinstellungen"
           online_payment: "Online-Bezahlung"
