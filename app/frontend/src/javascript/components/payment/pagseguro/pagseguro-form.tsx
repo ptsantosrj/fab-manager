@@ -1,11 +1,8 @@
 import React, { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react';
-import KRGlue from '@lyracom/embedded-form-glue';
 import { GatewayFormProps } from '../abstract-payment-modal';
-import SettingAPI from '../../../api/setting';
 import PayzenAPI from '../../../api/payzen';
-// import PagseguroAPI from '../../../api/pagseguro';
+import PagseguroAPI from '../../../api/pagseguro';
 import {
-  CreateTokenResponse,
   KryptonClient,
   KryptonError, PaymentTransaction,
   ProcessPaymentAnswer
@@ -27,38 +24,11 @@ export const PagseguroForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, 
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('loader');
 
   useEffect(() => {
-    SettingAPI.query(['payzen_endpoint', 'payzen_public_key']).then(settings => {
-      createToken().then(formToken => {
-        // Load the remote library
-        KRGlue.loadLibrary(settings.get('payzen_endpoint'), settings.get('payzen_public_key'))
-          .then(({ KR }) =>
-            KR.setFormConfig({
-              formToken: formToken.formToken
-            })
-          )
-          .then(({ KR }) => KR.addForm('#payzenPaymentForm'))
-          .then(({ KR, result }) => KR.showForm(result.formId))
-          .then(({ KR }) => KR.onFormReady(handleFormReady))
-          .then(({ KR }) => KR.onFormCreated(handleFormCreated))
-          .then(({ KR }) => { PayZenKR.current = KR; })
-          .catch(error => onError(error));
-      }).catch(error => onError(error));
-    });
+    PagseguroAPI.createPaymentLink(cart, customer).then(payment => {
+      console.log(payment);
+      handleFormReady();
+    }).catch(error => onError(error));
   }, [cart, paymentSchedule, customer]);
-
-  /**
-   * Ask the API to create the form token.
-   * Depending on the current transaction (schedule or not), a PayZen Token or Payment may be created.
-   */
-  const createToken = async (): Promise<CreateTokenResponse> => {
-    if (updateCard) {
-      return await PayzenAPI.updateToken(paymentSchedule?.id);
-    } else if (paymentSchedule) {
-      return await PayzenAPI.chargeCreateToken(cart, customer);
-    } else {
-      return await PayzenAPI.chargeCreatePayment(cart, customer);
-    }
-  };
 
   /**
    * Callback triggered on PayZen successful payments
@@ -102,14 +72,6 @@ export const PagseguroForm: React.FC<PayzenFormProps> = ({ onSubmit, onSuccess, 
    */
   const handleFormReady = () => {
     setLoadingClass('hidden');
-  };
-
-  /**
-   * Callback triggered when the PayZen form has started to show up but is not entirely loaded
-   * @see https://docs.lyra.com/fr/rest/V4.0/javascript/features/reference.html#%C3%89v%C3%A9nements
-   */
-  const handleFormCreated = () => {
-    setLoadingClass('loader-overlay');
   };
 
   /**

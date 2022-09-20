@@ -5,9 +5,7 @@ import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
 import { Invoice } from '../../../models/invoice';
 
-import payzenLogo from '../../../../../images/payzen-secure.png';
-import mastercardLogo from '../../../../../images/mastercard.png';
-import visaLogo from '../../../../../images/visa.png';
+import pagseguroLogo from '../../../../../images/pagseguro-logo.png';
 import { PagseguroForm } from './pagseguro-form';
 
 interface PagseguroModalProps {
@@ -22,11 +20,8 @@ interface PagseguroModalProps {
 }
 
 /**
- * This component enables the user to input his card data or process payments, using the PayZen gateway.
- * Supports Strong-Customer Authentication (SCA).
- *
- * This component should not be called directly. Prefer using <CardPaymentModal> which can handle the configuration
- *  of a different payment gateway.
+ * This component show a button for redirect user to PagSeguro Checkout
+ * in case of checkout redirect
  */
 export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
   /**
@@ -34,10 +29,8 @@ export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleMo
    */
   const logoFooter = (): ReactNode => {
     return (
-      <div className="payzen-modal-icons">
-        <img src={payzenLogo} alt="powered by PayZen" />
-        <img src={mastercardLogo} alt="mastercard" />
-        <img src={visaLogo} alt="visa" />
+      <div className="pagseguro-modal-icons">
+        <img src={pagseguroLogo} alt="Checkout PagSeguro" />
       </div>
     );
   };
@@ -66,7 +59,7 @@ export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleMo
       toggleModal={toggleModal}
       logoFooter={logoFooter()}
       formId="pagseguro-form"
-      formClassName="payzen-form"
+      formClassName="pagseguro-form"
       className="pagseguro-modal"
       currentUser={currentUser}
       cart={cart}
