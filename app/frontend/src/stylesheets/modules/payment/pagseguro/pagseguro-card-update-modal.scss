@@ -1,0 +1,73 @@
+.pagseguro-card-update-modal {
+  .card-form {
+    background-color: #f4f3f3;
+    border: 1px solid #ddd;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+
+    .pagseguro-errors {
+      padding: 4px 0;
+      color: #9e2146;
+      overflow: auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+    .loader {
+      text-align: center;
+    }
+    .loader-overlay {
+      position: absolute;
+      top: 65px;
+      left: 190px;
+      z-index: 1;
+    }
+    .pagseguro-container {
+      display: flex;
+      justify-content: center;
+      width: inherit;
+
+      .kr-payment-button {
+        display: none;
+      }
+
+      .kr-form-error {
+        display: none;
+      }
+    }
+  }
+  .fab-modal-content {
+    .submit-card {
+      .submit-card-btn {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 0 0 6px 6px;
+        border-top: 0;
+        padding: 16px;
+        color: #fff;
+        background-color: #1d98ec;
+        margin-bottom: 15px;
+
+        &[disabled] {
+          background-color: lighten(#1d98ec, 20%);
+        }
+      }
+
+      .payment-pending {
+        @extend .submit-card-btn;
+        background-color: lighten(#1d98ec, 20%);
+        text-align: center;
+        padding: 4px;
+      }
+    }
+  }
+  .pagseguro-modal-icons {
+    text-align: center;
+
+    img {
+      max-width: 300px;
+    }
+  }
+}
