@@ -246,6 +246,7 @@ Rails.application.routes.draw do
 
     ## Pagseguro gateway
     post 'pagseguro/test_token' => 'pagseguro#test_token'
+    post 'pagseguro/create_payment_link' => 'pagseguro#create_payment_link'
 
     # local payments handling
     post 'local_payment/confirm_payment' => 'local_payment#confirm_payment'
