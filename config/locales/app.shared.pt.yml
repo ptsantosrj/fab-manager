@@ -539,3 +539,5 @@ pt:
         show_reserved_uniq: "Show only slots with reservations"
       machine:
         machine_uncategorized: "Uncategorized machines"
+      pagseguro_form:
+        warning_redirect: "Ao confirmar você será redirecionado para a tela de pagamento da PagSeguro."
