@@ -539,3 +539,5 @@ fr:
         show_reserved_uniq: "Afficher uniquement les créneaux avec réservation"
       machine:
         machine_uncategorized: "Machines non classés"
+      pagseguro_form:
+        warning_redirect: "When confirming, you will be redirected to the PagSeguro payment screen."
