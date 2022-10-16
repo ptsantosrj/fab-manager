@@ -542,3 +542,5 @@ en:
       form_unsaved_list:
         save_reminder: "Do not forget to save your changes"
         cancel: "Cancel"
+      pagseguro_form:
+        warning_redirect: "When confirming, you will be redirected to the PagSeguro payment screen."
