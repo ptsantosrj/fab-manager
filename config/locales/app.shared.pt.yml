@@ -540,5 +540,7 @@ pt:
       machine:
         machine_uncategorized: "Uncategorized machines"
       form_unsaved_list:
-        save_reminder: "Do not forget to save your changes"
-        cancel: "Cancel"
+        save_reminder: "Não esqueça de salvar suas modificações"
+        cancel: "Cancelar"
+      pagseguro_form:
+        warning_redirect: "Ao confirmar você será redirecionado para a tela de pagamento da PagSeguro."
