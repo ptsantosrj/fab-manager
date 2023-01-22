@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/pagseguro/pagseguro-sdk-ruby.git
+  revision: a3d210508cb5e49728a1ed2c7d0117593cd31302
+  specs:
+    pagseguro-oficial (2.6.1)
+      aitch (~> 0.2)
+      i18n (~> 0.7)
+      json (~> 2.3)
+      nokogiri (~> 1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,8 +64,8 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     aes_key_wrap (1.1.0)
     afm (0.2.2)
-    aitch (1.2.1)
-      nokogiri
+    aitch (0.5.0)
+      nokogiri (>= 1.6.0)
     ansi (1.5.0)
     api-pagination (4.8.2)
     apipie-rails (0.5.17)
@@ -150,8 +160,8 @@ GEM
     erubi (1.10.0)
     et-orbi (1.2.7)
       tzinfo
-    faker (2.10.2)
-      i18n (>= 1.6, < 2)
+    faker (2.2.1)
+      i18n (>= 0.8)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.15.5)
@@ -172,7 +182,7 @@ GEM
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     httpclient (2.8.3)
-    i18n (1.12.0)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     icalendar (2.7.1)
       ice_cube (~> 0.16)
@@ -279,11 +289,6 @@ GEM
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    pagseguro-oficial (2.4.0)
-      aitch (>= 0.2.1)
-      i18n
-      json
-      nokogiri
     parallel (1.19.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -546,7 +551,7 @@ DEPENDENCIES
   omniauth_openid_connect
   openlab_ruby
   overcommit
-  pagseguro-oficial (~> 2.4.0)
+  pagseguro-oficial (~> 2.6.1)!
   pdf-reader
   pg
   pg_search
