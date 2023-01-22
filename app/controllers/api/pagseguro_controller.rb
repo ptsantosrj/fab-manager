@@ -1,5 +1,6 @@
 class API::PagseguroController < API::PaymentsController
     include PagSeguro
+    require 'pagseguro/helper'
     
     # PagSeguro don't has a specific method for test API when send a list request for test token
     def test_token
@@ -17,8 +18,46 @@ class API::PagseguroController < API::PaymentsController
 
     # Create a request payment and return a object  with url for redirect to payment checkout
     def create_payment_link
-        credentials = PagSeguro::AccountCredentials.new(Setting.get('pagseguro_email'), Setting.get('pagseguro_token'))
-        render json: credentials.as_json, status: :ok
+        cart = shopping_cart
+        amount = debit_amount(cart)
+        @id = PagSeguro::Helper.generate_ref(params[:cart_items], params[:customer_id])
+
+        payment = PagSeguro::PaymentRequest.new
+        payment.credentials = PagSeguro::AccountCredentials.new(Setting.get('pagseguro_email'), Setting.get('pagseguro_token'))
+        payment.reference = @id
+        payment.notification_url = ENV['PAGSEGURO_URL_REDIRECT']
+        payment.redirect_url = ENV['PAGSEGURO_URL_REDIRECT']
+        payment.max_uses = 1
+        payment.max_age = 30000  # em segundos
+        # payment.extra_params << { Tipo: reservable.class.to_s }
+
+        payment.sender = {
+            name: current_user.profile.full_name,
+            email: current_user.email,
+            document: { type: "CPF", value: current_user.profile.cpf },
+        }
+
+        cart.items.each_with_index do |product, index|
+            payment.items << {
+                id: index + 1,
+                description: product.name,
+                amount: product.price[:amount].to_i / 100.00,
+                quantity: 1
+            }
+        end
+
+        puts "=> REQUEST"
+        puts PagSeguro::PaymentRequest::RequestSerializer.new(payment).to_params
+        response = payment.register
+        if not response.errors.any?
+            result = {
+                code: response.code,
+                url: response.url
+            }
+            render json: result.as_json, status: :ok and return
+        end
+        render(json: response.errors.as_json, status: :bad_gateway)
+        
     rescue StandardError => e
         render json: e, status: :bad_gateway
     end
