@@ -26,6 +26,9 @@ export const PagseguroForm: React.FC<PayzenFormProps> = ({ onError, children, cl
 
     PagseguroAPI.createPaymentLink(cart, customer).then(payment => {
       console.log(payment);
+      if (payment.url) {
+        window.location.href = payment.url;
+      }
     }).catch(error => onError(error))
       .finally(() => setLoadingClass('hidden'));
   };
