@@ -1,7 +1,7 @@
 
 export interface PaymentLinkResponse{
   code: string
-  date: string 
+  url: string 
 }
 
 export interface SdkTestResponse {
