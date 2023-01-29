@@ -24,6 +24,8 @@ class Checkout::PaymentService
       Payments::StripeService.new.payment(order, coupon_code, payment_id)
     elsif PayZen::Helper.enabled?
       Payments::PayzenService.new.payment(order, coupon_code)
+    elsif PagSeguro::Helper.enabled?
+      Payments::PagseguroService.new.payment(order,coupon_code)
     else
       raise PaymentGatewayError, 'Bad gateway or online payment is disabled'
     end
