@@ -2,6 +2,7 @@
 
 require 'stripe/helper'
 require 'pay_zen/helper'
+require 'pagseguro/helper'
 
 # API Controller for cart checkout
 class API::CheckoutController < API::ApiController
@@ -23,6 +24,8 @@ class API::CheckoutController < API::ApiController
     render json: Stripe::Helper.human_error(e), status: :unprocessable_entity
   rescue PayzenError => e
     render json: PayZen::Helper.human_error(e), status: :unprocessable_entity
+  rescue PagseguroError => e
+    render json: PagSeguro::Helper.human_error(e), status: :unprocessable_entity
   rescue StandardError => e
     render json: e, status: :unprocessable_entity
   end

@@ -4,6 +4,7 @@ import { ShoppingCart } from '../../../models/payment';
 import { PaymentSchedule } from '../../../models/payment-schedule';
 import { User } from '../../../models/user';
 import { Invoice } from '../../../models/invoice';
+import { Order } from '../../../models/order';
 
 import pagseguroLogo from '../../../../../images/pagseguro-logo.png';
 import { PagseguroForm } from './pagseguro-form';
@@ -14,6 +15,7 @@ interface PagseguroModalProps {
   afterSuccess: (result: Invoice|PaymentSchedule) => void,
   onError: (message: string) => void,
   cart: ShoppingCart,
+  order?: Order,
   currentUser: User,
   schedule?: PaymentSchedule,
   customer: User
@@ -23,7 +25,7 @@ interface PagseguroModalProps {
  * This component show a button for redirect user to PagSeguro Checkout
  * in case of checkout redirect
  */
-export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer }) => {
+export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleModal, afterSuccess, onError, cart, currentUser, schedule, customer, order }) => {
   /**
    * Return the logos, shown in the modal footer.
    */
@@ -36,9 +38,9 @@ export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleMo
   };
 
   /**
-   * Integrates the PayzenForm into the parent PaymentModal
+   * Integrates the PagSeguro into the parent PaymentModal
    */
-  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children }) => {
+  const renderForm: FunctionComponent<GatewayFormProps> = ({ onSubmit, onSuccess, onError, operator, className, formId, cart, customer, paymentSchedule, children, order }) => {
     return (
       <PagseguroForm onSubmit={onSubmit}
         onSuccess={onSuccess}
@@ -47,6 +49,7 @@ export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleMo
         operator={operator}
         formId={formId}
         cart={cart}
+        order={order}
         className={className}
         paymentSchedule={paymentSchedule}>
         {children}
@@ -63,6 +66,7 @@ export const PagseguroModal: React.FC<PagseguroModalProps> = ({ isOpen, toggleMo
       className="pagseguro-modal"
       currentUser={currentUser}
       cart={cart}
+      order={order}
       customer={customer}
       afterSuccess={afterSuccess}
       onError={onError}
