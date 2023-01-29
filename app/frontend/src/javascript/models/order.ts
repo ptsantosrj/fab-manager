@@ -1,6 +1,7 @@
 import { TDateISO } from '../typings/date-iso';
 import { PaymentConfirmation } from './payment';
 import { CreateTokenResponse } from './payzen';
+import { CreatePaymentLinkResponse } from './pagseguro';
 import { UserRole } from './user';
 import { Coupon } from './coupon';
 import { ApiFilter, PaginatedIndex } from './api';
@@ -68,7 +69,7 @@ export interface Order {
 
 export interface OrderPayment {
   order: Order,
-  payment?: PaymentConfirmation|CreateTokenResponse
+  payment?: PaymentConfirmation|CreateTokenResponse|CreatePaymentLinkResponse
 }
 
 export type OrderIndex = PaginatedIndex<Order>;

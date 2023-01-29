@@ -18,6 +18,10 @@ class PagSeguro::Helper
       res
     end
 
+    def human_error(error)
+      I18n.t('errors.messages.gateway_error', { MESSAGE: error.message })
+    end
+
     ## generate an unique string reference for the content of a cart
     def generate_ref(cart_items, customer)
       require 'sha3'
