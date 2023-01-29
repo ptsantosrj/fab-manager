@@ -83,6 +83,7 @@ const CardPaymentModal: React.FC<CardPaymentModalProps> = ({ isOpen, toggleModal
       afterSuccess={afterSuccess}
       onError={onError}
       cart={cart}
+      order={order}
       currentUser={currentUser}
       schedule={schedule}
       customer={customer} />;

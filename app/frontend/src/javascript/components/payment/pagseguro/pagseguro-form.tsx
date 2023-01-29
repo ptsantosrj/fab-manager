@@ -1,10 +1,12 @@
 import React, { FormEvent, FunctionComponent, useState } from 'react';
 import { GatewayFormProps } from '../abstract-payment-modal';
+import CheckoutAPI from '../../../api/checkout';
 import PagseguroAPI from '../../../api/pagseguro';
 import { useTranslation } from 'react-i18next';
+import { CreatePaymentLinkResponse } from '../../../models/pagseguro';
 
 // we use these two additional parameters to update the card, if provided
-interface PayzenFormProps extends GatewayFormProps {
+interface PagSeguroFormProps extends GatewayFormProps {
   updateCard?: boolean,
 }
 
@@ -12,7 +14,7 @@ interface PayzenFormProps extends GatewayFormProps {
  * A form component to collect the credit card details and to create the payment method on Stripe.
  * The form validation button must be created elsewhere, using the attribute form={formId}.
  */
-export const PagseguroForm: React.FC<PayzenFormProps> = ({ onError, children, className, cart, customer, formId }) => {
+export const PagseguroForm: React.FC<PagSeguroFormProps> = ({ onError, children, className, formId, order, cart, customer }) => {
   const [loadingClass, setLoadingClass] = useState<'hidden' | 'loader' | 'loader-overlay'>('hidden');
   const { t } = useTranslation('shared');
 
@@ -23,14 +25,22 @@ export const PagseguroForm: React.FC<PayzenFormProps> = ({ onError, children, cl
     setLoadingClass('loader');
     event.preventDefault();
     event.stopPropagation();
-
-    PagseguroAPI.createPaymentLink(cart, customer).then(payment => {
-      console.log(payment);
-      if (payment.url) {
-        window.location.href = payment.url;
-      }
-    }).catch(error => onError(error))
-      .finally(() => setLoadingClass('hidden'));
+    if (order) {
+      CheckoutAPI.payment(order).then(res => {
+        const payment = res.payment as CreatePaymentLinkResponse;
+        if (payment.url) {
+          window.location.href = payment.url;
+        }
+      }).catch(error => onError(error))
+        .finally(() => setLoadingClass('hidden'));
+    } else {
+      PagseguroAPI.createPaymentLink(cart, customer).then(payment => {
+        if (payment.url) {
+          window.location.href = payment.url;
+        }
+      }).catch(error => onError(error))
+        .finally(() => setLoadingClass('hidden'));
+    }
   };
 
   /**
