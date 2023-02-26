@@ -2,6 +2,7 @@
 
 require 'stripe/helper'
 require 'pay_zen/helper'
+require 'pagseguro/helper'
 
 # create remote items on currently active payment gateway
 class PaymentGatewayService
@@ -12,6 +13,9 @@ class PaymentGatewayService
               elsif PayZen::Helper.enabled?
                 require 'pay_zen/service'
                 PayZen::Service
+              elsif PagSeguro::Helper.enabled?
+                require 'pagseguro/service'
+                PagSeguro::Service
               else
                 require 'payment/service'
                 Payment::Service
@@ -64,6 +68,9 @@ class PaymentGatewayService
               when /^Stripe::/
                 require 'stripe/service'
                 Stripe::Service
+              when /^PagSeguro::/
+                require 'pagseguro/service'
+                PagSeguro::Service
               else
                 require 'payment/service'
                 Payment::Service
