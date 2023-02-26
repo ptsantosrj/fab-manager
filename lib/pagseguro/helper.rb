@@ -31,15 +31,48 @@ class PagSeguro::Helper
       SHA3::Digest.hexdigest(:sha224, content)[0...24]
     end
 
-    ## Create customer informations
-    def generate_customer(customer_id, operator_id, cart_items)
+    ## Create sender informations
+    def generate_sender(customer_id)
       customer = User.find(customer_id)
-      operator = User.find(operator_id)
-
       {
-        senderName: customer.name,
-        senderEmail: customer.email
-      }         
+        name: customer.profile.full_name,
+        email: customer.email,
+        document: generate_document(customer)
+      }        
+    end
+
+    def generate_items(cart_items, operator_id)
+      operator = User.find(operator_id)
+      items = Array.new
+      cart =  case cart_items
+              when ShoppingCart, Order
+                cart_items
+              else
+                cs = CartService.new(operator)
+                cs.from_hash(cart_items)
+              end
+
+      if cart.is_a? Order
+        cart.order_items.map do |item|
+          items << {
+            id: item.orderable_id,
+            description: "RESERVA FABLAB",
+            amount: item.amount.to_i / 100.00,
+            quantity: item.quantity.to_i
+          }
+        end
+        return items
+      end
+
+      cart.items.map do |item|
+        items << {
+            id: 1,
+            description: item.name,
+            amount: item.price[:amount].to_i / 100.00,
+            quantity: 1
+        }
+      end
+      items
     end
 
     ## Generate a hash map compatible with PayZen 'V4/Customer/ShoppingCart'
@@ -68,6 +101,16 @@ class PagSeguro::Helper
           }
         end
       }
+    end
+
+    private
+
+    def generate_document(customer)
+      if customer.organization?
+        return { type: "CNPJ", value: customer.profile.cpf }
+      else
+        return { type: "CPF", value: customer.profile.cpf }
+      end
     end
   end
 end
