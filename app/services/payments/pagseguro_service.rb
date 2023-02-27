@@ -8,37 +8,19 @@ class Payments::PagseguroService
 
   def payment(order, coupon_code)
     amount = debit_amount(order, coupon_code)
+
     raise Cart::ZeroPriceError if amount.zero?
 
-    user = order.statistic_profile.user
+    id = PagSeguro::Helper.generate_ref(order, order.statistic_profile.user.id)
 
-    id = PagSeguro::Helper.generate_ref(order, user.id)
+    payment_result = PagSeguro::Service.new.create_payment(
+      amount,
+      @id,
+      PagSeguro::Helper.generate_sender(order.statistic_profile.user.id),
+      PagSeguro::Helper.generate_items(order, order.statistic_profile.user.id)
+    )
 
-    payment = PagSeguro::PaymentRequest.new
-    payment.credentials = PagSeguro::AccountCredentials.new(Setting.get('pagseguro_email'), Setting.get('pagseguro_token'))
-    payment.reference = @id
-    payment.notification_url = "https://webhook.site/54f40941-7b67-435d-882b-5f53024fee15"
-    payment.redirect_url = ENV['PAGSEGURO_URL_REDIRECT']
-    payment.max_uses = 1
-    payment.max_age = 30000  # em segundos
-    # payment.extra_params << { Tipo: reservable.class.to_s }
-
-    payment.sender = {
-      name: user.profile.full_name,
-      email: user.email,
-      document: { type: "CPF", value: user.profile.cpf },
-  }
-
-  order.items.each_with_index do |product, index|
-      payment.items << {
-          id: index + 1,
-          description: product.name,
-          amount: product.price[:amount].to_i / 100.00,
-          quantity: 1
-      }
-  end
-
-    { order: order, payment: { code: id, url: 'test'} }
+    { order: order, payment: payment_result }
   end
 
   def confirm_payment(order, coupon_code, payment_id)
