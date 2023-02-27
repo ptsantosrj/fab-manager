@@ -41,6 +41,7 @@ class PagSeguro::Helper
       }        
     end
 
+    ## generate hasgmap compatipble with pagseguro request
     def generate_items(cart_items, operator_id)
       operator = User.find(operator_id)
       items = Array.new
@@ -73,34 +74,6 @@ class PagSeguro::Helper
         }
       end
       items
-    end
-
-    ## Generate a hash map compatible with PayZen 'V4/Customer/ShoppingCart'
-    def generate_shopping_cart(cart_items, customer, operator)
-      cart = if cart_items.is_a? ShoppingCart
-               cart_items
-             else
-               cs = CartService.new(operator)
-               cs.from_hash(cart_items)
-             end
-      pagseguro_items = cart.items.map do |item|
-        {
-          amount: item.price[:amount],
-          description: item.name,
-          quantity: 1,
-        }
-      end
-
-      {
-        cartItemInfo: cart.items.map do |item|
-          {
-            productAmount: item.price[:amount].to_i.to_s,
-            productLabel: item.name,
-            productQty: 1.to_s,
-            productType: customer.organization? ? 'SERVICE_FOR_BUSINESS' : 'SERVICE_FOR_INDIVIDUAL'
-          }
-        end
-      }
     end
 
     private
