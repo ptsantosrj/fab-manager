@@ -13,7 +13,7 @@ class PagSeguro::Service < Payment::Service
         payment = PagSeguro::PaymentRequest.new
         payment.credentials = PagSeguro::AccountCredentials.new(Setting.get('pagseguro_email'), Setting.get('pagseguro_token'))
         payment.reference = order_id
-        payment.notification_url = "https://webhook.site/54f40941-7b67-435d-882b-5f53024fee15"
+        payment.notification_url = "https://webhook.site/8c63ab0f-da32-4711-a96a-8a0bd57917cd"
         payment.redirect_url = ENV['PAGSEGURO_URL_REDIRECT']
         payment.max_uses = 1
         payment.max_age = 30000  # em segundos
