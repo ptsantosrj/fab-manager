@@ -1613,10 +1613,10 @@ pt:
         visibility_for_other_members: "Para todos os outros membros"
         reservation_deadline: "Impedir a reserva da última hora"
         reservation_deadline_help: "Se você aumentar o período prévio, os membros não serão capazes de reservar um slot X minutos antes do seu início."
-        machine_deadline_minutes: "Machine prior period (minutes)"
-        training_deadline_minutes: "Training prior period (minutes)"
-        event_deadline_minutes: "Event prior period (minutes)"
-        space_deadline_minutes: "Space prior period (minutes)"
+        machine_deadline_minutes: "Período prévio da máquina (minutos)"
+        training_deadline_minutes: "TPeríodo prévio do treinamento (minutos)"
+        event_deadline_minutes: "Período prévio do evento (minutos)"
+        space_deadline_minutes: "Período prévio do espaço (minutos)"
         ability_for_the_users_to_move_their_reservations: "Habilidade para os usuários mover suas reservas"
         reservations_shifting: "Mudança de reservas"
         prior_period_hours: "Período anterior (horas)"
@@ -1737,9 +1737,9 @@ pt:
         address: "Endereço"
         address_required_info_html: "Você pode definir se o endereço deve ser necessário para registrar um novo usuário no Fab-manager.<br/><strong>Por favor, note</strong> que, dependendo do seu país, as regulamentações podem exigir endereços para que as faturas sejam válidas."
         address_is_required: "Endereço é obrigatório"
-        external_id: "External identifier"
-        external_id_info_html: "You can set up an external identifier for your users, which cannot be modified by the user himself."
-        enable_external_id: "Enable the external ID"
+        external_id: "Identificador externo"
+        external_id_info_html: "Você pode configurar um identificador externo para seus usuários, que não pode ser modificado pelo próprio usuário."
+        enable_external_id: "Habilitar id externo"
         captcha: "Captcha"
         captcha_info_html: "Você pode configurar uma proteção contra robôs, para evitar que eles criem contas de membros. Esta proteção está usando o Google reCAPTCHA. Inscreva-se para <a href='http://www.google.com/recaptcha/admin' target='_blank'>um par de chaves de API</a> para começar a usar o captcha."
         site_key: "Chave do site"
@@ -2276,12 +2276,16 @@ pt:
             price_low: "Price: low to high"
             price_high: "Price: high to low"
         store_list_header:
-          result_count: "Result count:"
-          sort: "Sort:"
-          visible_only: "Visible products only"
+          result_count: "Total:"
+          sort: "Ordenar:"
+          visible_only: "Mostrar apenas produtos"
         product_item:
+<<<<<<< HEAD
           product: "product"
           visible: "visible"
+=======
+          visible: "visível"
+>>>>>>> 74bc24fd8... feat: add cpf and news pt-BR translations
           hidden: "hidden"
           stock:
             internal: "Private stock"

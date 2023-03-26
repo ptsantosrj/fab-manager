@@ -221,7 +221,7 @@ class API::MembersController < API::ApiController
   def user_params
     if current_user.id == params[:id].to_i
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
-                                   profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
+                                   profile_attributes: [:id, :first_name, :last_name,  :cpf, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
                                                         { user_avatar_attributes: %i[id attachment destroy] }],

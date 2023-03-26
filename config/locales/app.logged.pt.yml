@@ -22,7 +22,7 @@ pt:
         user_s_profile_is_required: "Seu perfil de usuário é obrigatório."
         i_ve_read_and_i_accept_: "Eu li e aceito"
         _the_fablab_policy: "a política do FabLab"
-        your_profile_has_been_successfully_updated: "Seu perfil foi actualizado com êxito."
+        your_profile_has_been_successfully_updated: "Seu perfil foi atualizalo com sucesso."
         completion_header_info:
           rules_changed: "Por favor, preencha o formulário a seguir para atualizar seu perfil e continuar a usar a plataforma."
           sso_intro: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
@@ -89,7 +89,7 @@ pt:
           _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização"
           _disconnect_then_reconnect_: "disconecte e se conecte novamente"
           _for_your_changes_to_take_effect: "para que suas alterações tenham efeitos."
-          your_profile_has_been_successfully_updated: "Seu perfil foi actualizado com êxito."
+          your_profile_has_been_successfully_updated: "Seu perfil foi atualizado com sucesso."
         #dashboard: my projects
         projects:
           you_dont_have_any_projects: "Você não tem nenhum projeto."
