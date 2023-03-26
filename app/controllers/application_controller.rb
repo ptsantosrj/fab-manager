@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: [
                                         {
-                                          profile_attributes: %i[phone last_name first_name interest software_mastered],
+                                          profile_attributes: %i[phone last_name first_name cpf interest software_mastered],
                                           invoicing_profile_attributes: [
                                             organization_attributes: [:name, { address_attributes: [:address] }],
                                             user_profile_custom_fields_attributes: %i[profile_custom_field_id value],

@@ -69,6 +69,22 @@
           </div>
         </div>
 
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.cpf.$dirty && signupForm.cpf.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input type="text"
+                     name="cpf"
+                     ng-model="user.profile_attributes.cpf"
+                     class="form-control"
+                     placeholder="{{ 'app.public.common.your_cpf' | translate }}"
+                     required>
+            </div>
+            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_profile' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="help-block" ng-show="signupForm.cpf.$dirty && signupForm.cpf.$error.required" translate>{{ 'app.public.common.cpf_is_required' }}</span>
+          </div>
+        </div>
+
         <div class="form-group required-row" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">

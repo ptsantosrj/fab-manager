@@ -15,7 +15,7 @@ json.profile_attributes do
       json.attachment_url "#{member.profile.user_avatar.attachment_url}?#{member.profile.user_avatar.updated_at.to_i}"
     end
   end
-  json.extract! member.profile, :facebook, :twitter, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
+  json.extract! member.profile, :cpf, :facebook, :twitter, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
   json.tours member.profile.tours&.split || []
 end
 
