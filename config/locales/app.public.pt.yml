@@ -22,7 +22,7 @@ pt:
         my_events: "Meus Eventos"
         my_invoices: "Minhas Contas"
         my_payment_schedules: "Meus agendamentos de pagamento"
-        my_orders: "My orders"
+        my_orders: "Minhas faturas"
         my_wallet: "Minha Carteira"
         #contextual help
         help: "Ajuda"
@@ -70,6 +70,8 @@ pt:
         surname_is_required: "Sobrenome é obrigatório."
         your_pseudonym: "Seu usuário"
         pseudonym_is_required: "Apelido é obrigatório."
+        your_cpf: "Seu CPF"
+        cpf_is_required: "CPF é obrigatório."
         your_email_address: "Seu e-mail"
         email_is_required: "E-mail é obrigatório."
         your_password: "Sua senha"
@@ -93,10 +95,10 @@ pt:
         phone_number_is_required: "Número de telefone é obrigatório."
         address: "Endereço"
         address_is_required: "O endereço é necessário"
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize users, registered on the site, to contact me"
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Eu autorizo os usuários do site entrarem em contato comigo"
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
-        _the_fablab_policy: "the terms of use"
+        _the_fablab_policy: "os termos de uso"
         field_required: "Campo obrigatório"
         profile_custom_field_is_required: "{FEILD} é obrigatório"
         user_supporting_documents_required: "Atenção!<br>Você se declarou como \"{GROUP}\", é possível sejam solicitados documentos de comprovação."
@@ -115,7 +117,7 @@ pt:
         connection: "Login"
         password_forgotten: "Esqueceu sua senha?"
         confirm_my_account: "Confirmar sua conta"
-        not_registered_to_the_fablab: "Not yet registered?"
+        not_registered_to_the_fablab: "Não registrado ainda?"
         create_an_account: "Criar conta"
         wrong_email_or_password: "E-mail ou senha incorretos."
         caps_lock_is_on: "A tecla Caps Lock está ativada."
@@ -153,7 +155,7 @@ pt:
         create_an_account: "Criar uma conta"
         discover_members: "Ver membros"
         #next events summary on the home page
-        fablab_s_next_events: "Next events"
+        fablab_s_next_events: "Próximos eventos"
         every_events: "Todos Eventos"
       event_card:
         on_the_date: "Em {DATE}"
@@ -455,7 +457,7 @@ pt:
           price_changed_PRICE: "The product price was modified to {PRICE}"
           unauthorized_offering_product: "You can't offer anything to yourself"
       orders_dashboard:
-        heading: "My orders"
+        heading: "Minhas faturas"
         sort:
           newest: "Mais recentes primeiro"
           oldest: "Mais antigos primeiro"

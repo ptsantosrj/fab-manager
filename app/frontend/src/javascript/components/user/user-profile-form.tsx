@@ -189,6 +189,14 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
           <h4>{t('app.shared.user_profile_form.personal_data')}</h4>
           <GenderInput register={register} disabled={isDisabled} />
           <div className="names">
+            <FormInput id="profile_attributes.cpf"
+                       register={register}
+                       rules={{ required: true }}
+                       disabled={isDisabled}
+                       formState={formState}
+                       label={t('app.shared.user_profile_form.cpf')} />
+          </div>
+          <div className="names">
             <FormInput id="profile_attributes.last_name"
                        register={register}
                        rules={{ required: true }}

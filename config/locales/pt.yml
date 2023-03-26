@@ -656,6 +656,6 @@ pt:
     store_withdrawal_instructions: "Withdrawal instructions"
     store_hidden: "Store hidden to the public"
     advanced_accounting: "Advanced accounting"
-    external_id: "external identifier"
+    external_id: "identificador externo"
     prevent_invoices_zero: "prevent building invoices at 0"
     invoice_VAT-name: "VAT name"
