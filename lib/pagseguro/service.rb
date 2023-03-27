@@ -14,7 +14,7 @@ class PagSeguro::Service < Payment::Service
         payment.credentials = PagSeguro::AccountCredentials.new(Setting.get('pagseguro_email'), Setting.get('pagseguro_token'))
         payment.reference = order_id
         payment.notification_url = Rails.application.secrets.notification_url
-        payment.redirect_url = Rails.application.redirect_url
+        payment.redirect_url = Rails.application.secrets.redirect_url
         payment.max_uses = 1
         payment.max_age = 30000  # em segundos
         payment.sender = sender
