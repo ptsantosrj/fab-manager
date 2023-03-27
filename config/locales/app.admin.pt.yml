@@ -2280,13 +2280,9 @@ pt:
           sort: "Ordenar:"
           visible_only: "Mostrar apenas produtos"
         product_item:
-<<<<<<< HEAD
           product: "product"
-          visible: "visible"
-=======
           visible: "visível"
->>>>>>> 74bc24fd8... feat: add cpf and news pt-BR translations
-          hidden: "hidden"
+          hidden: "não visível"
           stock:
             internal: "Private stock"
             external: "Public stock"
