@@ -97,7 +97,6 @@ gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs', '~> 7.1.23'
 
 gem 'stripe', '5.29.0'
-gem 'pagseguro-oficial', '~> 2.6.1', git: 'https://github.com/pagseguro/pagseguro-sdk-ruby.git'
 
 gem 'recurrence'
 
@@ -150,3 +149,5 @@ gem 'acts_as_list'
 # Error reporting
 gem 'sentry-rails'
 gem 'sentry-ruby'
+
+# gem 'pagseguro-oficial', '~> 2.6.1', git: 'https://github.com/pagseguro/pagseguro-sdk-ruby.git'
