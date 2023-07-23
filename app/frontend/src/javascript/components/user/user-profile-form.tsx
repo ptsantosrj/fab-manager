@@ -33,6 +33,7 @@ import { SettingName } from '../../models/setting';
 import SettingAPI from '../../api/setting';
 import { SelectOption } from '../../models/select';
 import ValidationLib from '../../lib/validation';
+import Inputmask from 'inputmask';
 
 declare const Application: IApplication;
 
@@ -96,6 +97,8 @@ export const UserProfileForm: React.FC<UserProfileFormProps> = ({ action, size, 
     SettingAPI.query(['phone_required', 'address_required', 'external_id'])
       .then(settings => setFieldsSettings(settings))
       .catch(error => onError(error));
+
+    Inputmask({ mask: '999.999.999-99', clearMaskOnLostFocus: true }).mask('[name="profile_attributes.cpf"]');
   }, []);
 
   /**

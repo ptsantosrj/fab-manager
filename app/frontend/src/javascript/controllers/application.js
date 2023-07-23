@@ -74,7 +74,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       if (Fablab.activeProviderType !== 'DatabaseProvider') {
         $window.location.href = '/sso-redirect';
       } else {
-        return $uibModal.open({
+        const signupModal = $uibModal.open({
           templateUrl: '/shared/signupModal.html',
           backdrop: 'static',
           keyboard: false,
@@ -195,7 +195,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $uibModalInstance.dismiss('cancel');
             };
           }]
-        }).result.finally(null).then(function (res) {
+        });
+        signupModal.result.finally(null).then(function (res) {
           // when the account was created successfully, set the session to the newly created account
           if (res.settings.confirmation_required === 'true') {
             Auth._currentUser = null;
@@ -204,6 +205,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             $scope.setCurrentUser(res.user);
           }
         });
+        signupModal.rendered.then(function () {
+          /* eslint-disable */
+          Inputmask({'mask': '999.999.999-99', 'clearMaskOnLostFocus': true }).mask('[name="cpf"]'); 
+        });
+        return signupModal;
       }
     };
 
